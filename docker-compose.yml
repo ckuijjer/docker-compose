@@ -1,0 +1,45 @@
+version: "2"
+services:
+  jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    volumes:
+      - ~/config/jackett:/config
+      - ~/Downloads/torrent-blackhole:/downloads
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    ports:
+      - 9117:9117
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    depends_on:
+      - jackett
+    volumes:
+      - ~/config/sonarr:/config
+      - ~/Downloads:/downloads
+      - ~/Downloads/TV:/tv
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    ports:
+      - 8989:8989
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    depends_on:
+      - jackett
+    volumes:
+      - ~/config/radarr:/config
+      - ~/Downloads:/downloads
+      - ~/Downloads/Movies:/movies
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    ports:
+      - 7878:7878
+
