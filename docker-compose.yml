@@ -12,6 +12,7 @@ services:
       - TZ=Europe/Amsterdam
     ports:
       - 9117:9117
+    restart: always
   sonarr:
     image: linuxserver/sonarr
     container_name: sonarr
@@ -27,6 +28,7 @@ services:
       - TZ=Europe/Amsterdam
     ports:
       - 8989:8989
+    restart: always
   radarr:
     image: linuxserver/radarr
     container_name: radarr
@@ -42,4 +44,4 @@ services:
       - TZ=Europe/Amsterdam
     ports:
       - 7878:7878
-
+    restart: always
